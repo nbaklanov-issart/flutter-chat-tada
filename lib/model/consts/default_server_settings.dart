@@ -1,3 +1,4 @@
+import 'package:tada_chat/model/server_data/message_history.dart';
 import 'package:tada_chat/model/server_data/server_settings.dart';
 
 const int maxMessageLength = 10500;

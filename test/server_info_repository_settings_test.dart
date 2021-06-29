@@ -71,7 +71,7 @@ void main() {
       ServerInfoRepository _repository = ServerInfoRepository(_dataSource);  
 
       when(_dataSource.getServerSettings())
-        .thenAnswer((_) async => ServerInfoReponse<String>(mockData, ResponseType.error));
+        .thenAnswer((_) async => ServerInfoReponse<String>(mockData, ResponseType.success));
 
       ServerInfoReponse<ServerSettings> response = await _repository.getServerSettings();
       expect(response.message.uptime, defaultUpTime);
