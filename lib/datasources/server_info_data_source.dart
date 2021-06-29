@@ -1,4 +1,3 @@
-import 'package:tada_chat/model/server_data/message_history.dart';
 import 'package:tada_chat/model/server_info_response.dart';
 
 abstract class ServerInfoDataSource {

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart';
-import 'package:tada_chat/datasources/user_data_source.dart';
 import 'package:tada_chat/model/enum/response_type.dart';
 import 'package:tada_chat/model/server_data/server_settings.dart';
 import 'package:tada_chat/model/server_info_response.dart';
