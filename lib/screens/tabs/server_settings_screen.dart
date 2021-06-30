@@ -12,9 +12,11 @@ class ServerSettingsScreen extends StatelessWidget {
     return Center(
       child: Column(
         children: [
+          Spacer(),
           Text("Max message length : ${settings.maxMessageLength}"),
           Text("Max room title length : ${settings.maxRoomTitleLength}"),
-          Text("Max username length : ${settings.maxUsernameLength}")
+          Text("Max username length : ${settings.maxUsernameLength}"),
+          Spacer()
         ]
       )
     );

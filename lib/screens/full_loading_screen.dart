@@ -15,8 +15,8 @@ class FullLoadingScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                width: dimen.width / 4,
-                height: dimen.width / 4,
+                width: dimen.width / 3,
+                height: dimen.width / 3,
                 child: CircularProgressIndicator()
               )
             ]

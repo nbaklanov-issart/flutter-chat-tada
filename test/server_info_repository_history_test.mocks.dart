@@ -39,4 +39,10 @@ class MockServerInfoDataSource extends _i1.Mock
               returnValue: Future<_i2.ServerInfoReponse<String>>.value(
                   _FakeServerInfoReponse<String>()))
           as _i4.Future<_i2.ServerInfoReponse<String>>);
+  @override
+  _i4.Future<_i2.ServerInfoReponse<String>> getChatRooms() =>
+      (super.noSuchMethod(Invocation.method(#getChatRooms, []),
+              returnValue: Future<_i2.ServerInfoReponse<String>>.value(
+                  _FakeServerInfoReponse<String>()))
+          as _i4.Future<_i2.ServerInfoReponse<String>>);
 }

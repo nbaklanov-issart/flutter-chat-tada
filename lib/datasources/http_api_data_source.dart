@@ -10,27 +10,34 @@ class HttpApiDataSource extends ServerInfoDataSource {
 
   @override
   Future<ServerInfoReponse<String>> getServerSettings() async {
-    try {      
-      http.Response response = await http.get(Uri.parse("$baseServerAddress/settings"));
-      return response.statusCode == successStatus
-        ? ServerInfoReponse(response.body, ResponseType.success)
-        : ServerInfoReponse(
-            "Settings respose status : ${response.statusCode}",
-            ResponseType.error
-          );
-
-    } catch(exception) {
-      return ServerInfoReponse(
-        "Exception during settings request",
-        ResponseType.error
-      );
-    }
+    return _performGetRequest(
+      "$baseServerAddress/settings", 
+      "Exception during settings request"
+    );
   }
 
   @override
   Future<ServerInfoReponse<String>> getMessagesHistory(String roomName) async {
+    return _performGetRequest(
+      "$baseServerAddress/rooms/$roomName/history", 
+      "Exception during room history request"
+    );
+  }
+
+  @override
+  Future<ServerInfoReponse<String>> getChatRooms() {
+    return _performGetRequest(
+      "$baseServerAddress/rooms", 
+      "Exception during room list request"
+    );
+  }
+
+  Future<ServerInfoReponse<String>> _performGetRequest(
+    String url,
+    String errorMessage
+  ) async {
     try {      
-      http.Response response = await http.get(Uri.parse("$baseServerAddress/rooms/$roomName/history"));
+      http.Response response = await http.get(Uri.parse(url));
       return response.statusCode == successStatus
         ? ServerInfoReponse(response.body, ResponseType.success)
         : ServerInfoReponse(
@@ -39,7 +46,7 @@ class HttpApiDataSource extends ServerInfoDataSource {
           );
     } catch(exception) {
       return ServerInfoReponse(
-        "Exception during room history request",
+        errorMessage,
         ResponseType.error
       );
     }
