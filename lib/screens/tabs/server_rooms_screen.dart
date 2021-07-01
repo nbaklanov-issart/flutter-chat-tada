@@ -50,7 +50,7 @@ class ServerRoomsScreen extends StatelessWidget {
     Navigator.push(
       context, 
       MaterialPageRoute(
-        builder: (context) => ChatRoomBuilder()
+        builder: (context) => ChatRoomBuilder(room.name)
       )
     );
   }

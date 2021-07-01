@@ -1,0 +1,4 @@
+enum ChatStatus {
+  loadingHistory,
+  ready
+}

@@ -30,6 +30,7 @@ dependencies:
   get_it: ^7.0.0
   shared_preferences: ^2.0.6
   provider: ^5.0.0
+  web_socket_channel: ^2.1.0
 
   mockito: ^5.0.10
 
