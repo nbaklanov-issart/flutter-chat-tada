@@ -3,6 +3,7 @@ import 'package:tada_chat/model/consts/colors.dart';
 import 'package:tada_chat/model/system/screen_dimensions.dart';
 import 'package:tada_chat/screens/tabs/server_rooms_screen.dart';
 import 'package:tada_chat/screens/tabs/server_settings_screen.dart';
+import 'package:tada_chat/screens/tabs/user_settings_screen.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({ Key? key }) : super(key: key);
@@ -59,6 +60,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         return ServerRoomsScreen();
       case settingScreenIndex:
         return ServerSettingsScreen();
+      case userScreenIndex:
+        return UserSettingsScreen();
       default:
         return Container();
     }

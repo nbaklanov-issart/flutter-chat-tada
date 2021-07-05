@@ -1,15 +1,26 @@
 import 'dart:convert';
 
 import 'package:tada_chat/model/consts/default_user_settings.dart';
+import 'package:tada_chat/model/web_socket_data/chat_incoming_message.dart';
 import 'package:tada_chat/model/web_socket_data/chat_outgoing_message.dart';
+import 'package:tada_chat/services/web_service_listener.dart';
 import 'package:web_socket_channel/io.dart';
 
 class WebService {
   static const String _baseAddress = "wss://nane.tada.team/ws";
 
-  final String _userName = defaultUsername;
+  String _userName = defaultUsername;
+
   IOWebSocketChannel? _channel;
-  
+  WebServiceListener? _listener;
+
+  void setUsername(String newUsername) {
+    _userName = newUsername;
+  }
+
+  void setListener(WebServiceListener chatListener) {
+    _listener = chatListener;
+  }
 
   void connect() {
     _channel = IOWebSocketChannel.connect(
@@ -18,12 +29,15 @@ class WebService {
     );
 
     _channel?.stream.listen((event) {
-      print("Data from stream : $event");
+      Map<String, dynamic> map = json.decode(event);
+      ChatIncomingMessage message = ChatIncomingMessage.fromJson(map);
+
+      _listener?.onData(message);
     });
   }
 
-  void send(String text) {
-    Map<String, dynamic> map = ChatOutgoingMessage("fff", text, defaultId).toJson();
+  void send(String text, String roomName) {
+    Map<String, dynamic> map = ChatOutgoingMessage(roomName, text, defaultId).toJson();
     String parsed = json.encode(map);
 
     _channel?.sink.add(parsed);

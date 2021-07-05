@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:tada_chat/helper/date_helper.dart';
+import 'package:tada_chat/model/consts/style.dart';
 import 'package:tada_chat/model/server_data/chat_room.dart';
 import 'package:tada_chat/model/server_data/chat_rooms_list.dart';
 import 'package:tada_chat/model/server_info_response.dart';
@@ -15,8 +17,9 @@ class ServerRoomsScreen extends StatelessWidget {
     return FutureBuilder(
       future: _repository.getRoomsList(),
       builder: (buildContext, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
+        if (snapshot.connectionState == ConnectionState.done) {          
           ServerInfoReponse<ChatRoomsList> data = snapshot.data as ServerInfoReponse<ChatRoomsList>;          
+          print(data.type);
           return _buildRoomsList(data.message.result, context);
         } else {
           return FullLoadingScreen();
@@ -35,14 +38,22 @@ class ServerRoomsScreen extends StatelessWidget {
   }
 
   Widget _buildRoomRow(ChatRoom room, BuildContext context) {
+    String lastMessage = DateHelper.convertToString(room.lastMessage.created);
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () => _openRoom(room, context),
-      child: Column(
-        children: [
-          Text(room.name),
-          Text(room.lastMessage.created)
-        ],
-      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Text(room.name, style: messageSenderStyle),
+            Text(
+              "Last message : $lastMessage", 
+              style: dateTextStyle
+            )
+          ]
+        )
+      )
     );
   }
 

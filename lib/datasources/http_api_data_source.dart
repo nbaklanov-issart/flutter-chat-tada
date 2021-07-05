@@ -45,6 +45,7 @@ class HttpApiDataSource extends ServerInfoDataSource {
             ResponseType.error
           );
     } catch(exception) {
+      print(exception);
       return ServerInfoReponse(
         errorMessage,
         ResponseType.error

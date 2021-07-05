@@ -6,6 +6,14 @@ class UserDataRepository {
 
   UserDataRepository(this._dataSource);
 
+  void saveUsername(String newUsername) {
+    _dataSource.saveUserName(newUsername);
+  }
+
+  String getUsername() {
+    return _dataSource.getUserName();
+  }
+
   void saveServerSettings(ServerSettings settings, { bool overwriteExisting = false }) {
     _dataSource.saveServerSettings(settings, overwriteExisting: overwriteExisting);
   }

@@ -3,10 +3,12 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:tada_chat/model/states/chat_room_state.dart';
 import 'package:tada_chat/repositories/server_info_repository.dart';
+import 'package:tada_chat/repositories/user_data_repository.dart';
 import 'package:tada_chat/screens/chat/chat_room_screen.dart';
 
 class ChatRoomBuilder extends StatelessWidget {
   final ServerInfoRepository _repository = GetIt.instance.get<ServerInfoRepository>();
+  final UserDataRepository _userData = GetIt.instance.get<UserDataRepository>();
   final String _roomName;
 
   ChatRoomBuilder(
@@ -18,7 +20,11 @@ class ChatRoomBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ChatRoomState>(
       create: (context) {
-        final state = ChatRoomState(_roomName, _repository);
+        final state = ChatRoomState(
+          _roomName, 
+          _repository,
+          _userData
+        );
         state.refreshMessages();
         return state;
       },
